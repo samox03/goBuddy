@@ -18,17 +18,15 @@ const userSchema = new Schema(
       // validate: [validateEmail, 'Please fill a valid email address'],
       match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address']
     },
-    
+
     passwordHash: { 
       type: String, 
       require: true, 
       unique: true },
 
-    usertype: String,
-    birthday: { type: date },
+    usertype: {type:String,  enum: ['buddy','inNeed'],},
+    birthday: Date,
     choiceOfAction: String,
-    grouping: String,
-
   },
   {
     timestamps: true

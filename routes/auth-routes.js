@@ -86,7 +86,7 @@ if(!req.session.currentUser) {
 res.redirect('/')
 }
 else {
-    res.send('we are sorry, you just can see this if you are logged in')
+    res.send('We are sorry, you just can see this if you are logged in')
 }
 })
 

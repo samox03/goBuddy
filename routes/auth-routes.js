@@ -22,7 +22,7 @@ router.post("/signup", (req, res, next) => {
 
   // all fields have to be filled stays untouched
   if (!username || !email || !password || !usertype || !birthday || !choiceOfAction) {
-      res.render('users/signup', { errorMessage: 'All fields are mandatory. Please provide your username, email and password.' })
+      res.render('users/signup', { errorMessage: 'All fields are mandatory. Please provide all required input.' })
       return;
   }
 
@@ -64,6 +64,9 @@ router.post("/signup", (req, res, next) => {
       });
 })
 
+
+//////////// Only for logged in users: ///////////
+
 //user profile route
 router.get('/userView', (req, res) => {
   res.render('users/userView', {
@@ -71,8 +74,20 @@ router.get('/userView', (req, res) => {
   });
 });
 
+router.get('/loggedInContent', (req, res) => {
+if(!req.session.currentUser) {
+res.redirect('/')
+}
+else {
+    res.send('we are sorry, you just can see this if you are logged in')
+}
+})
 
 
+//////////// L O G O U T ///////////
+router.post('/logout', (req, res) => {
+    req.session.destroy();
+});
 
 
 

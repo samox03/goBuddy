@@ -9,66 +9,71 @@ const mongoose = require('mongoose');
 
 
 //////////// L A N D I N G P A G E ///////////
-router.get('/', (res, req) => {
-    res.render('openViews/landingPage')
-})
+// router.get('/', (req, res) => {
+//     res.render('openViews/landingPage')
+// })
 
 //////////// S I G N U P ___buddies  ///////////
 
 /* GET home page */
 router.get("/signup/buddy", (req, res, next) => {
-  res.render("users/signupBuddy")
+    res.render("users/signupBuddy")
 });
 
 
 router.post("/signup/buddy", (req, res, next) => {
-  console.log("User input:", req.body);
-  //storing the userinput 
-  //usertype still undefined and needs to be preset for this formvalidation 
-  const { username, email, password, birthday, choiceOfAction } = req.body;
+    console.log("User input:", req.body);
+    //storing the userinput 
+    //usertype still undefined and needs to be preset for this formvalidation 
+    const { username, email, password, birthday, choiceOfAction } = req.body;
 
-  // all fields have to be filled stays untouched
-  if (!username || !email || !password || !birthday || !choiceOfAction) {
-      res.render('users/signupBuddy', { errorMessage: 'All fields are mandatory. Please provide all required input.' })
-      return;
-  }
+   let  password1 = password[0]
 
-  //make sure passwords are strong
-  const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
-  if (!regex.test(password)) {
-      res.status(500)
-          .render('users/signupBuddy', { errorMessage: 'Password needs to have at least 6 chars and must contain at least one number, one lowercase and one uppercase letter.' });
-      return;
-  }
-  //creating the according data in db, but using the encrypted version:
-  //generate salt
-  const salt = bcrypt.genSaltSync(saltRounds);
-  //create a hashed version of the password:
-  const hash1 = bcrypt.hashSync(password, salt);
+    // all fields have to be filled stays untouched
+    //   if (!username || !email || !password || !birthday || !choiceOfAction) {
+    if (!username || !email || !password1 || !birthday) {
+        console.log("not all fields ...")
+        res.render('users/signupBuddy', { errorMessage: 'All fields are mandatory. Please provide all required input.' })
+        return;
+    }
 
-  User.create({ username: username, email: email, password: hash1, usertype: "buddy", bithday: birthday, choiceOfAction: choiceOfAction })
-      // .then(() => {
-      //     res.send("user created")
-      // })
+    //make sure passwords are strong
+    const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
+    if (!regex.test(password1)) {
+        res.status(500)
+            .render('users/signupBuddy', { errorMessage: 'Password needs to have at least 6 chars and must contain at least one number, one lowercase and one uppercase letter.' });
+        return;
+    }
+    //creating the according data in db, but using the encrypted version:
+    //generate salt
+    const salt = bcrypt.genSaltSync(saltRounds);
+    //create a hashed version of the password:
+    const hash1 = bcrypt.hashSync(password1, salt);
 
-      .then(userFromDB => {
-          console.log('A new buddy has joined the pool: ', userFromDB);
-          res.redirect('/auth/userView');
-      })
-      .catch(error => {
-          if (error instanceof mongoose.Error.ValidationError) {
-              res.status(500).render('users/signupBuddy', {
-                  errorMessage: error.message
-              });
-          } else if (error.code === 11000) {
-              res.status(500).render('users/signupBuddy', {
-                  errorMessage: 'Username and email need to be unique. Either username or email is already used.'
-              });
-          }
-          else {
-              next(error);
-          }
-      });
+    console.log("creating user ...")
+    User.create({ username: username, email: email, password: hash1, usertype: "buddy", bithday: birthday, choiceOfAction: choiceOfAction })
+        // .then(() => {
+        //     res.send("user created")
+        // })
+
+        .then(userFromDB => {
+            console.log('A new buddy has joined the pool: ', userFromDB);
+            res.redirect('/auth/userView');
+        })
+    //   .catch(error => {
+    //       if (error instanceof mongoose.Error.ValidationError) {
+    //           res.status(500).render('users/signupBuddy', {
+    //               errorMessage: error.message
+    //           });
+    //       } else if (error.code === 11000) {
+    //           res.status(500).render('users/signupBuddy', {
+    //               errorMessage: 'Username and email need to be unique. Either username or email is already used.'
+    //           });
+    //       }
+    //       else {
+    //           next(error);
+    //       }
+    //   });
 })
 
 
@@ -76,18 +81,18 @@ router.post("/signup/buddy", (req, res, next) => {
 
 //user profile route
 router.get('/buddyView', (req, res) => {
-  res.render('users/buddyView', {
-      userInSession: req.session.currentUser
-  });
+    res.render('users/buddyView', {
+        userInSession: req.session.currentUser
+    });
 });
 
 router.get('/loggedInContent', (req, res) => {
-if(!req.session.currentUser) {
-res.redirect('/')
-}
-else {
-    res.send('We are sorry, you just can see this if you are logged in')
-}
+    if (!req.session.currentUser) {
+        res.redirect('/')
+    }
+    else {
+        res.send('We are sorry, you just can see this if you are logged in')
+    }
 })
 
 
@@ -99,21 +104,21 @@ else {
 /* GET home page */
 router.get("/signup/tiger", (req, res, next) => {
     res.render("users/signupTiger")
-  });
-  
-  
-  router.post("/signup/tiger", (req, res, next) => {
+});
+
+
+router.post("/signup/tiger", (req, res, next) => {
     console.log("User input:", req.body);
     //storing the userinput 
     //usertype still undefined and needs to be preset for this formvalidation 
     const { username, email, password, birthday, choiceOfAction } = req.body;
-  
+
     // all fields have to be filled stays untouched
     if (!username || !email || !password || !birthday || !choiceOfAction) {
         res.render('users/signupTiger', { errorMessage: 'All fields are mandatory. Please provide all required input.' })
         return;
     }
-  
+
     //make sure passwords are strong
     const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
     if (!regex.test(password)) {
@@ -126,12 +131,12 @@ router.get("/signup/tiger", (req, res, next) => {
     const salt = bcrypt.genSaltSync(saltRounds);
     //create a hashed version of the password:
     const hash1 = bcrypt.hashSync(password, salt);
-  
+
     User.create({ username: username, email: email, password: hash1, usertype: "tiger", bithday: birthday, choiceOfAction: choiceOfAction })
         // .then(() => {
         //     res.send("user created")
         // })
-  
+
         .then(userFromDB => {
             console.log('A new buddy has joined the pool: ', userFromDB);
             res.redirect('/auth/userView');
@@ -150,27 +155,27 @@ router.get("/signup/tiger", (req, res, next) => {
                 next(error);
             }
         });
-  })
-  
-  
-  //////////// Only for logged in ___tigers: ///////////
-  
-  //user profile route
-  router.get('/tigerView', (req, res) => {
+})
+
+
+//////////// Only for logged in ___tigers: ///////////
+
+//user profile route
+router.get('/tigerView', (req, res) => {
     res.render('users/tigerView', {
         userInSession: req.session.currentUser
     });
-  });
-  
-  router.get('/loggedInContent', (req, res) => {
-  if(!req.session.currentUser) {
-  res.redirect('/')
-  }
-  else {
-      res.send('we are sorry, you just can see this if you are logged in')
-  }
-  })
-  
+});
+
+router.get('/loggedInContent', (req, res) => {
+    if (!req.session.currentUser) {
+        res.redirect('/')
+    }
+    else {
+        res.send('we are sorry, you just can see this if you are logged in')
+    }
+})
+
 
 
 

@@ -22,16 +22,28 @@ router.get("/signup/buddy", (req, res, next) => {
 
 
 router.post("/signup/buddy", (req, res, next) => {
-    console.log("User input:", req.body);
+    console.log("User input (buddy):", req.body);
     //storing the userinput 
     //usertype still undefined and needs to be preset for this formvalidation 
     const { username, email, password, birthday, choiceOfAction } = req.body;
 
-   let  password1 = password[0]
+    //reducing the passwords to one
+    //still open: check if both inputs are the same
+    if (password[0] === password[1]) {
+        let password1 = password[0]
+    }
+    else {
+        res.send('Please confirm your password again.')
+    }
+
+    //task: Storing in choiceOfAction which checkboxes are activated: dailyTasks/hangignOut/teaching
+    
+    
+
 
     // all fields have to be filled stays untouched
     //   if (!username || !email || !password || !birthday || !choiceOfAction) {
-    if (!username || !email || !password1 || !birthday) {
+    if (!username || !email || !password || !birthday) {
         console.log("not all fields ...")
         res.render('users/signupBuddy', { errorMessage: 'All fields are mandatory. Please provide all required input.' })
         return;
@@ -58,7 +70,7 @@ router.post("/signup/buddy", (req, res, next) => {
 
         .then(userFromDB => {
             console.log('A new buddy has joined the pool: ', userFromDB);
-            res.redirect('/auth/userView');
+            res.redirect('/auth/buddyView');
         })
     //   .catch(error => {
     //       if (error instanceof mongoose.Error.ValidationError) {
@@ -91,7 +103,7 @@ router.get('/loggedInContent', (req, res) => {
         res.redirect('/')
     }
     else {
-        res.send('We are sorry, you just can see this if you are logged in')
+        res.send('We are sorry, you re just able to see this if you are logged in')
     }
 })
 
@@ -108,8 +120,13 @@ router.get("/signup/tiger", (req, res, next) => {
 
 
 router.post("/signup/tiger", (req, res, next) => {
-    console.log("User input:", req.body);
+    console.log("User input (tiger):", req.body);
     //storing the userinput 
+
+    //---------> OPEN:
+    //defining array content choiceOfAction, taken from checkboxes
+
+
     //usertype still undefined and needs to be preset for this formvalidation 
     const { username, email, password, birthday, choiceOfAction } = req.body;
 
@@ -139,7 +156,7 @@ router.post("/signup/tiger", (req, res, next) => {
 
         .then(userFromDB => {
             console.log('A new buddy has joined the pool: ', userFromDB);
-            res.redirect('/auth/userView');
+            res.redirect('/auth/tigerView');
         })
         .catch(error => {
             if (error instanceof mongoose.Error.ValidationError) {

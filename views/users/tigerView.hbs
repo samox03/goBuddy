@@ -1,7 +1,14 @@
 <div id="navbar">
   <navbar>
-    <h2>Welcome {{username}}</h2>
-    <a href="/auth/logout">Logout</a>
+    <ul>
+      <li><h2>Welcome {{userInSession.username}}</h2></li>
+      <li><a href="/auth/logout">Logout</a></li>
+      <li>
+        <button>
+          <a href="/tigerView">TEST: Reload the page</a>
+        </button>
+      </li>
+    </ul>
   </navbar>
 </div>
 
@@ -16,7 +23,7 @@
       <p>spaaace/box</p>
     </div>
     <div>
-    <button type="submit">Update your profile</button>
+      <button type="submit">Update your profile</button>
     </div>
   </div>
 

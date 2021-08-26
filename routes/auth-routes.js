@@ -8,11 +8,6 @@ const saltRounds = 10;
 const mongoose = require('mongoose');
 
 
-//////////// L A N D I N G P A G E ///////////
-// router.get('/', (req, res) => {
-//     res.render('openViews/landingPage')
-// })
-
 //////////// S I G N U P ___buddies  ///////////
 
 /* GET home page */
@@ -23,27 +18,37 @@ router.get("/signup/buddy", (req, res, next) => {
 
 router.post("/signup/buddy", (req, res, next) => {
     console.log("User input (buddy):", req.body);
+
+
     //storing the userinput 
     //usertype still undefined and needs to be preset for this formvalidation 
-    const { username, email, password, birthday, choiceOfAction } = req.body;
+    const { username, email, password, birthday, hangingOut, dailyTasks, teaching } = req.body;
 
     //reducing the passwords to one
     //still open: check if both inputs are the same
+    let password1 
     if (password[0] === password[1]) {
-        let password1 = password[0]
+        password1 = password[0]
     }
     else {
         res.send('Please confirm your password again.')
     }
+    let choiceOfAction =[]
 
     //task: Storing in choiceOfAction which checkboxes are activated: dailyTasks/hangignOut/teaching
-    
-    
-
+    if(dailyTasks === "on") {
+        choiceOfAction.push('dailyTasks')
+    } 
+    if(hangingOut == "on" ) {
+        choiceOfAction.push('hangingOut')
+    }
+    if(teaching == "on" ) {
+        choiceOfAction.push('teaching')
+    } 
 
     // all fields have to be filled stays untouched
     //   if (!username || !email || !password || !birthday || !choiceOfAction) {
-    if (!username || !email || !password || !birthday) {
+    if (!username || !email || !password1 || !birthday) {
         console.log("not all fields ...")
         res.render('users/signupBuddy', { errorMessage: 'All fields are mandatory. Please provide all required input.' })
         return;
@@ -63,7 +68,7 @@ router.post("/signup/buddy", (req, res, next) => {
     const hash1 = bcrypt.hashSync(password1, salt);
 
     console.log("creating user ...")
-    User.create({ username: username, email: email, password: hash1, usertype: "buddy", bithday: birthday, choiceOfAction: choiceOfAction })
+    User.create({ username: username, email: email, passwordHash: hash1, usertype: "buddy", bithday: birthday, choiceOfAction: choiceOfAction })
         // .then(() => {
         //     res.send("user created")
         // })
@@ -197,6 +202,10 @@ router.get('/loggedInContent', (req, res) => {
 
 
 //////////// L O G I N ////////////
+//---------> insert dependency: 
+//  ---------if user == tiger => display tigerView
+//  ---------if user == buddy => display buddyView
+
 
 // .get() route ==> to display the login form to users
 router.get('/login', (req, res) => {
@@ -215,13 +224,21 @@ router.post('/login', (req, res, next) => {
         });
         return;
     }
+    //look for the corresponding user in the data:
     User.findOne({ email })
         .then(user => {
             if (!user) {
                 res.render('users/login', { errorMessage: 'Email is not registered. Try with other email.' });
                 return;
             } else if (bcryptjs.compareSync(password, user.password)) {
+                 // when we introduce session, the following line gets replaced with what follows:
+                 // res.render('users/user-profile', { user });
+
                 //******* SAVE THE USER IN THE SESSION ********//
+
+      ////////////////////////////////
+      /////////////////////////////////
+      //Problem: differentiate between buddy and tiger view in session function          
                 req.session.currentUser = user;
                 res.redirect('/auth/userView');
             } else {
@@ -238,6 +255,7 @@ router.post('/login', (req, res, next) => {
 //////////// L O G O U T ///////////
 router.post('/logout', (req, res) => {
     req.session.destroy();
+    res.redirect('/');
 });
 
 

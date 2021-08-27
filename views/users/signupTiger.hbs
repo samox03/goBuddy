@@ -1,74 +1,77 @@
+<section class="welcomeText">
+  <h2>Register to find a buddy near you</h2>
+  <h3>First of all, congratulations that you decided to ask for help. We know
+    this is not easy, so you can be proud of yourself.  <br> Fill out the form below,
+    so you can get access to the network of helping hands around you. </h3>
+</section>
 
-<div id="register-form">
-  <section class="welcomeText">
-    <h2>Register to find buddy near you</h2>
-      <h3>First of all, congratulations that you decided to ask for help. We know
-      this is not easy, so you can be proud of yourself.  Fill out the form below,
-      so you can get access to the network of helping hands around you. </h3>
-  </section>
-
- <section class="userDetails">
- {{!-- be carefull! Here the auth/ route is set!! maybe this has to be changed later on.. --}}
+<section class="userDetails">
   <div class="persDetails">
     <form action="/auth/signup/tiger" method="POST">
-        <label>Username
-        <input type="text" name="username" />
+        <label>Username <br>
+          <input type="text" name="username" />
         </label>
-      <br/>
+        <br />
         <label>
-        Email address
-        <input type="email" name="email" />
+          Email address <br>
+          <input type="email" name="email" />
         </label>
-      <br />
-        <label>Date of birth
-        <input type="date" name="birthday" />
+        <br />
+        <label>Date of birth <br>
+          <input type="date" name="birthday" />
         </label>
-      <br/>
-        <label>Where do you live?
-        <input type="text" name="city" />
+        <br />
+        <label>Where do you live? <br>
+          <input type="text" name="city" />
         </label>
-      <br/>
-  
-      <div class="userSpecification">
-        <h3> Where do you wish some support? Multiple choice possible.</h3>
-          <ul>
-            <li>
-              <input type="checkbox" id="hangingOut" name="hangingOut">
-              <label for="hangingOut"> hanging out (walk, showing your city, have a coffee/tea together, having a sport session together)
-              </label>  
-            </li>
-            <li>
-              <input type="checkbox" id="dailyTasks" name="dailyTasks">
-              <label for="dailyTasks">organisation & daily tasks (grocery shopping, watering plants, German burocracy) </label>  
-            </li>
-            <li>
-              <input type="checkbox" id="teaching" name="teaching">
-              <label for="teaching">teaching skills (tutoring, language help)
-              </label> 
-            </li>
-          </ul>
+        <br />
+  </div>
 
-      </div class="password-wrapper">
-            <label>Choose a password
-            <input type="password" name="password" placeholder="" />
-            </label>
+    <div class="userSpecification">
+      <h3> Where do you wish some support? Multiple choice possible.</h3>
+      <ul class="multipleChoice">
+        <li>
+          <input type="checkbox" id="hangingOut" name="hangingOut" />
+          <label for="hangingOut">
+            hanging out (walk, showing your city, have a coffee/tea together,
+            having a sport session together)  
+          </label>
+        </li>
+        <li>
+          <input type="checkbox" id="dailyTasks" name="dailyTasks" class="checkbox"/>
+          <label for="dailyTasks">organisation & daily tasks (grocery shopping,
+            watering plants, German burocracy) </label>
+        </li>
+        <li>
+          <input type="checkbox" id="teaching" name="teaching" />
+          <label for="teaching">teaching skills (tutoring, language help)  
+          </label>
+        </li>
+      </ul>
 
-            <label>Confirm the password
-            <input type="password" name="password" placeholder="" />
-            </label>
+      <div class="password-wrapper">
+        <div>
+        <label>Choose a password <br>
+          <input type="password" name="password" placeholder="" />
+        </label> 
+        </div>
+        <div>
+        <label>Confirm the password <br>
+          <input type="password" name="password" placeholder="" />
+        </label>
+        </div>
       </div>
 
       <div>
-          <button type="submit">Sign up</button>
+        <button type="submit" class="signUpBtn">Sign up</button>
       </div>
 
+    </div>
+  </form>
+</section>
 
-          {{#if errorMessage}}
-            <p class="error">{{errorMessage}}</p>
-          {{/if}}
-
-    </form>
-
-  </section>
-
-</div>
+       <div class="errorMessage">
+        {{#if errorMessage}}
+          <p class="error">{{errorMessage}}</p>
+        {{/if}}
+      </div>

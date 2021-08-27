@@ -132,7 +132,6 @@ router.post("/signup/tiger", (req, res, next) => {
     //storing the userinput 
 
     
-//////
 //storing the userinput 
     //usertype still undefined and needs to be preset for this formvalidation 
     const { username, email, password, birthday, hangingOut, dailyTasks, teaching } = req.body;

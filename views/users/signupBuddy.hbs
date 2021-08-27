@@ -1,4 +1,3 @@
-<div id="register-form">
   <section class="welcomeText">
     <h2>Register to find buddy near you</h2>
     <h3>First of all, congratulations that you decided to ask for help. We know
@@ -7,68 +6,69 @@
  </section>
 
 <section class="userDetails">
- {{!-- be carefull! Here the auth/ route is set!! maybe this has to be changed later on.. --}}
   <div class="persDetails">
-    <form action="/auth/signup/buddy" method="POST">
-      <label>Username
-        <input type="text" name="username" />
-      </label>
-      <br/>
-      <label>
-        Email address
-        <input type="email" name="email" />
-      </label>
+      <form action="/auth/signup/buddy" method="POST">
+        <label>Username <br>
+          <input type="text" name="username" />
+        </label>
+        <br/>
+        <label>
+          Email address <br>
+          <input type="email" name="email" />
+        </label>
+          <br />
+          <label>Date of birth <br>
+          <input type="date" name="birthday" />
+        </label>
         <br />
-        <label>Date of birth
-        <input type="date" name="birthday" />
-      </label>
-      <br />
-          <label>Where do you live?
-        <input type="text" name="city" />
-      </label>
-      <br/>
-
-
-  <div class="userSpecification">
-  <h3>How do you want to help? Multiple choice possible.</h3>
-    <ul>
-      <li>
-        <input type="checkbox" id="hangingOut" name="hangingOut">
-        <label for="hangingOut"> hanging out (walk, showing your city, have a coffee/tea together, having a sport session together)
-        </label>  
-      </li>
-      <li>
-        <input type="checkbox" id="dailyTasks" name="dailyTasks">
-        <label for="dailyTasks">organisation & daily tasks (grocery shopping, watering plants, German burocracy) </label>  
-      </li>
-      <li>
-        <input type="checkbox" id="teaching" name="teaching">
-        <label for="teaching">teaching skills (tutoring, language help)
-        </label> 
-      </li>
-    </ul>
-  </div>
-
-  <div class="password-wrapper">
-        <label>Choose a password
-        <input type="password" name="password" placeholder="" />
+            <label>Where do you live? <br>
+          <input type="text" name="city" />
         </label>
-
-        <label>Confirm the password
-        <input type="password" name="password" placeholder="" />
-        </label>
+        <br/>
   </div>
 
-  <div>
-        <button type="submit">Sign up</button>
-  </div>
+    <div class="userSpecification">
+    <h3>How do you want to help? Multiple choice possible.</h3>
+      <ul class="multipleChoice">
+        <li>
+          <input type="checkbox" id="hangingOut" name="hangingOut">
+          <label for="hangingOut"> hanging out (walk, showing your city, have a coffee/tea together, having a sport session together)
+          </label>
+        </li>
+        <li>
+          <input type="checkbox" id="dailyTasks" name="dailyTasks">
+          <label for="dailyTasks">organisation & daily tasks (grocery shopping, watering plants, German burocracy) </label>  
+        </li>
+        <li>
+          <input type="checkbox" id="teaching" name="teaching">
+          <label for="teaching">teaching skills (tutoring, language help)
+          </label> 
+        </li>
+      </ul>
 
+        <div class="password-wrapper">
+          <div>
+          <label>Choose a password <br>
+          <input type="password" name="password" placeholder="" />
+          </label>
+          </div>
+          <div>
+          <label>Confirm the password <br>
+          <input type="password" name="password" placeholder="" />
+          </label>
+          </div>
+        </div>
 
+        <div>
+          <button type="submit" class="signUpBtn">Sign up</button>
+        </div>
+
+    </div>
+  </form>
+</section> 
+
+      <div class="errorMessage">
       {{#if errorMessage}}
         <p class="error">{{errorMessage}}</p>
       {{/if}}
-
-    </form>
-
-  </section>
-</div>
+      </div>

@@ -179,4 +179,29 @@ input[type="checkbox"] {
   transition: 0.3s ease background;
 }
 
+#footer{
+font-size: 11px;
+display: flex;
+flex-direction: column;
+align-items: center;
+position: relative;
+margin-bottom: 0px;
+bottom: 0px;
+left: 0px;
+right: 0px;
+}
+
+#footer ul{
+list-style: none;
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
+#footer ul button{
+  border: none;
+  color: blue;
+  background-color: rgb(243, 234, 253);
+}
+
 /*# sourceMappingURL=style.css.map */

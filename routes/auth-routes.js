@@ -26,7 +26,7 @@ router.post("/signup/buddy", (req, res, next) => {
 
     //reducing the passwords to one
     //still open: check if both inputs are the same
-    let password1 
+    let password1
     if (password[0] === password[1]) {
         password1 = password[0]
     }
@@ -35,18 +35,18 @@ router.post("/signup/buddy", (req, res, next) => {
         return;
     }
 
-    let choiceOfAction =[]
+    let choiceOfAction = []
 
     //task: Storing in choiceOfAction which checkboxes are activated: dailyTasks/hangignOut/teaching
-    if(dailyTasks === "on") {
+    if (dailyTasks === "on") {
         choiceOfAction.push('dailyTasks')
-    } 
-    if(hangingOut == "on" ) {
+    }
+    if (hangingOut == "on") {
         choiceOfAction.push('hangingOut')
     }
-    if(teaching == "on" ) {
+    if (teaching == "on") {
         choiceOfAction.push('teaching')
-    } 
+    }
 
     // all fields have to be filled stays untouched
     //   if (!username || !email || !password || !birthday || !choiceOfAction) {
@@ -80,20 +80,20 @@ router.post("/signup/buddy", (req, res, next) => {
             console.log('A new buddy has joined the pool: ', userFromDB);
             res.redirect('/auth/buddyView');
         })
-      .catch(error => {
-          if (error instanceof mongoose.Error.ValidationError) {
-              res.status(500).render('users/signupBuddy', {
-                  errorMessage: error.message
-              });
-          } else if (error.code === 11000) {
-              res.status(500).render('users/signupBuddy', {
-                  errorMessage: 'Username and email need to be unique. Either username or email is already used.'
-              });
-          }
-          else {
-              next(error);
-          }
-      });
+        .catch(error => {
+            if (error instanceof mongoose.Error.ValidationError) {
+                res.status(500).render('users/signupBuddy', {
+                    errorMessage: error.message
+                });
+            } else if (error.code === 11000) {
+                res.status(500).render('users/signupBuddy', {
+                    errorMessage: 'Username and email need to be unique. Either username or email is already used.'
+                });
+            }
+            else {
+                next(error);
+            }
+        });
 })
 
 
@@ -111,7 +111,7 @@ router.get('/loggedInContent', (req, res) => {
         res.redirect('/')
     }
     else {
-        res.send('We are sorry, you re just able to see this if you are logged in')
+        res.send('We are sorry, you re just able to see this if you are logged in --- TODO: Add exclusive buddy content/functionalities')
     }
 })
 
@@ -131,14 +131,14 @@ router.post("/signup/tiger", (req, res, next) => {
     console.log("User input (tiger):", req.body);
     //storing the userinput 
 
-    
-//storing the userinput 
+
+    //storing the userinput 
     //usertype still undefined and needs to be preset for this formvalidation 
     const { username, email, password, birthday, hangingOut, dailyTasks, teaching } = req.body;
 
     //reducing the passwords to one
     //still open: check if both inputs are the same
-    let password1 
+    let password1
     if (password[0] === password[1]) {
         password1 = password[0]
     }
@@ -147,17 +147,17 @@ router.post("/signup/tiger", (req, res, next) => {
         return;
     }
 
-    let choiceOfAction =[]
+    let choiceOfAction = []
     //task: Storing in choiceOfAction which checkboxes are activated: dailyTasks/hangignOut/teaching
-    if(dailyTasks === "on") {
+    if (dailyTasks === "on") {
         choiceOfAction.push('dailyTasks')
-    } 
-    if(hangingOut == "on" ) {
+    }
+    if (hangingOut == "on") {
         choiceOfAction.push('hangingOut')
     }
-    if(teaching == "on" ) {
+    if (teaching == "on") {
         choiceOfAction.push('teaching')
-    } 
+    }
 
     // all fields have to be filled stays untouched
     //   if (!username || !email || !password || !birthday || !choiceOfAction) {
@@ -219,9 +219,10 @@ router.get('/loggedInContent', (req, res) => {
         res.redirect('/')
     }
     else {
-        res.send('we are sorry, you just can see this if you are logged in')
+        res.send('we are sorry, you just can see this if you are logged in --- TODO: Add exclusive tiger content/functionalities')
     }
 })
+
 
 
 
@@ -255,33 +256,36 @@ router.post('/login', (req, res, next) => {
             if (!user) {
                 res.render('users/login', { errorMessage: 'Email is not registered. Try with other email.' });
                 return;
-            } else if (bcrypt.compareSync(password, user.password)) {
-                 // when we introduce session, the following line gets replaced with what follows:
-                 // res.render('users/user-profile', { user });
+            } else if (bcrypt.compareSync(password, user.passwordHash)) {
+                // when we introduce session, the following line gets replaced with what follows:
+                // res.render('users/user-profile', { user });
 
                 //******* SAVE THE USER IN THE SESSION ********//
 
-      ////////////////////////////////
-      /////////////////////////////////
-      //Problem: differentiate between buddy and tiger view in session function          
+                ////////////////////////////////
+                /////////////////////////////////
+                //differentiate between buddy and tiger view in session function          
                 req.session.currentUser = user;
-                res.redirect('/auth/userView');
+                if (user.usertype === 'buddy') {
+                    res.redirect('/auth/buddyView');
+                }
+                else if (user.usertype === 'inNeed') {
+                    res.redirect('/auth/tigerView');
+                }
             } else {
                 res.render('users/login', { errorMessage: 'Incorrect password' });
             }
         })
-        .catch(error => next(error));
 });
-
-
 
 
 
 //////////// L O G O U T ///////////
 router.post('/logout', (req, res) => {
     req.session.destroy();
-    res.redirect('/');
+    // res.redirect('/');
 });
+
 
 
 

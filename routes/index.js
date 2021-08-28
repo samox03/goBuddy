@@ -6,4 +6,6 @@ router.get('/', (req, res, next) => {
   res.render('openViews/landingPage');
 });
 
+
 module.exports = router;
+

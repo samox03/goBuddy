@@ -1,7 +1,13 @@
 <div id="navbar">
   <navbar>
     <ul>
-      <li><h2>Welcome {{userInSession.username}}</h2></li>
+      <li>
+        {{#if userInSession}}
+          <h2>Welcome {{userInSession.username}}</h2>
+        {{else}}
+          <p>Still no logged in user, sorry!</p>
+        {{/if}}
+      </li>
       <li><a href="/auth/logout">Logout</a></li>
       <li>
         <button>
@@ -13,14 +19,20 @@
 </div>
 
 <div id="tigerViewLogIn-Wrapper">
-  <div>
-    <div class="tigerLeft">
-      <p>Write a few sentence about yourself:</p>
-      <p>spaaace/box</p>
+  <div class="tigerLeft">
+    <div>
+      <form class="tigerInputIntroduction">
+        <label for="tigerIntro">Write a few sentence about yourself:</label><br
+        />
+        <input type="text" id="tigerIntro" name="tigerIntro" />
+      </form>
     </div>
     <div>
-      <p>Write a few sentence about the help you need:</p>
-      <p>spaaace/box</p>
+      <form class="tigerInputHelpDefinition">
+        <label for="helpDef">Write a few sentence about the help you need:</label><br
+        />
+        <input type="text" id="helpDef" name="helpDef" />
+      </form>
     </div>
     <div>
       <button type="submit">Update your profile</button>

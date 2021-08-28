@@ -2,11 +2,16 @@
   <navbar>
     <ul>
       <li>
-        <h2>Welcome {{userInSession.username}}</h2>
+        {{#if userInSession}}
+          <h2>Welcome {{userInSession.username}} !</h2>
+        {{else}}
+          <p>Still no logged in user, sorry!</p>
+        {{/if}}
       </li>
       <li>
+        {{!-- search for username mit usertype tiger --}}
         <input type="search" id="searchfield" name="searchfield" />
-        <label for="searchfield">Search</label>
+        <label for="searchfield">Search for tigers</label>
       </li>
       <li>
         <button>
@@ -15,7 +20,7 @@
       </li>
       <li>
         {{! button to refresh page and see if there are new messages }}
-        <a href="">Mailbox</a>
+        {{!-- <a href="">Mailbox</a> --}}
       </li>
       <li>
         <a href="/auth/logout">Logout</a>
@@ -26,7 +31,19 @@
 
 <div>
   <h3>People around you in need</h3>
+      >>TODO: Alle Tigers aus der gleichen Stadt abbilden + Get in touch button
+
   <div id="mailboxBuddyWrapper">
-    >>TODO: Alle Tigers aus der gleichen Stadt abbilden Get in touch button
+    {{!-- {{#each INSERT:___tigersFromDB/From City XY}} --}}
+      Name: {{username}}
+      <br>
+      Born: {{}}
+      <br>
+      Profileinfo:
+      {{}}
+      <br>
+      <button><a href="/tiger/{{id}}">See Details</a></button>
+      <button><a href="/tiger/{{id}}/message">Get In Touch</a></button>
+    {{!-- {{/each}} --}}
   </div>
 </div>

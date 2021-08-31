@@ -52,4 +52,7 @@ app.use('/', index);
 const auth = require('./routes/auth-routes');
 app.use('/auth', auth);
 
+const contact = require('./routes/contact');
+app.use('/interact', contact);
+
 module.exports = app;

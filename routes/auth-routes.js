@@ -101,19 +101,16 @@ router.post("/signup/buddy", (req, res, next) => {
 
 //user profile route
 router.get('/buddyView', (req, res) => {
-    res.render('users/buddyView', {
-        userInSession: req.session.currentUser
-    });
-});
-
-router.get('/loggedInContent', (req, res) => {
     if (!req.session.currentUser) {
-        res.redirect('/')
+        res.send('We are sorry, you re just able to see this if you are logged in')
+        res.redirect('/');
     }
     else {
-        res.send('We are sorry, you re just able to see this if you are logged in --- TODO: Add exclusive buddy content/functionalities')
+        res.render('users/buddyView', {
+            userInSession: req.session.currentUser
+        });
     }
-})
+});
 
 
 
@@ -209,26 +206,20 @@ router.post("/signup/tiger", (req, res, next) => {
 
 //user profile route
 router.get('/tigerView', (req, res) => {
-    res.render('users/tigerView', {
-        userInSession: req.session.currentUser
-    });
-});
-
-router.get('/loggedInContent', (req, res) => {
     if (!req.session.currentUser) {
-        res.redirect('/')
+        res.send('We are sorry, you re just able to see this if you are logged in')
+        res.redirect('/');
     }
     else {
-        res.send('we are sorry, you just can see this if you are logged in --- TODO: Add exclusive tiger content/functionalities')
+        res.render('users/tigerView', {
+            userInSession: req.session.currentUser
+        });
     }
-})
-
-
-
+});
 
 
 //////////// L O G I N ////////////
-//---------> insert dependency: 
+//  dependency: 
 //  ---------if user == tiger => display tigerView
 //  ---------if user == buddy => display buddyView
 
@@ -285,7 +276,6 @@ router.post('/logout', (req, res) => {
     req.session.destroy();
     // res.redirect('/');
 });
-
 
 
 

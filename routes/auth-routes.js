@@ -181,7 +181,7 @@ router.post("/signup/tiger", (req, res, next) => {
     //create a hashed version of the password:
     const hash1 = bcrypt.hashSync(password1, salt);
 
-    User.create({ username: username, email: email, passwordHash: hash1, usertype: "inNeed", city: city, bithday: birthday, choiceOfAction: choiceOfAction, profileInput: {} })
+    User.create({ username: username, email: email, passwordHash: hash1, usertype: "inNeed", city: city, bithday: birthday, choiceOfAction: choiceOfAction })
 
         .then(userFromDB => {
             console.log('A new buddy has joined the pool: ', userFromDB);
@@ -214,10 +214,28 @@ router.get('/tigerView', (req, res) => {
         res.redirect('/');
     }
     else {
-        res.render('users/tigerView', {
-            userInSession: req.session.currentUser
-        });
+        User.findById(req.session.currentUser._id).then((user) => {
+            res.render('users/tigerView', {
+                userInSession: user
+            });
+        })
+        
     }
+});
+
+router.post('/tigerView', (req, res) => {
+    const userID = req.session.currentUser._id
+    User.findByIdAndUpdate(userID, {
+        profileInput: {
+            tigerIntro: req.body.tigerIntro,
+            helpDef: req.body.helpDef
+        }
+    })
+        .then(() => {
+            res.render('users/tigerView', {
+                userInSession: req.session.currentUser
+            });
+        });
 });
 
 
@@ -278,8 +296,8 @@ router.post('/logout', (req, res) => {
     req.session.destroy();
     // req.session.destroy(req.sessionID);
     res.redirect('/');
-  });
-  
+});
+
 
 
 

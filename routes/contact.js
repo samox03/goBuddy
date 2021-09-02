@@ -14,12 +14,10 @@ router.get('/tigerslist/:id', (req, res, next) => {
   const { id } = req.params;
   user.findById(id)
       .then(tigersDetails => {
-          res.render('interact/showTigerDetails',  tigersDetails)
+          res.render('interaction/showTigerDetails',  tigersDetails)
       })
-
       .catch(error => console.log(`Error while updating the celeb details: ${error}`))
 })
-
 
 //message to tiger
 //TODO:implememting the messaging stuff!! :)
@@ -28,7 +26,7 @@ router.get('/tigerslist/:id/message', (req, res, next) => {
   const {id} = req.params;
   user.findById(id)
   .then(tigerContact => {
-    res.render('interact/mess2tiger', tigerContact)
+    res.render('interaction/mess2tiger', tigerContact)
   })
   .catch(error => console.log(`Couldnt reach tiger contact: ${error}`))
 })

@@ -19,16 +19,21 @@ const userSchema = new Schema(
       match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address']
     },
 
-    passwordHash: { 
-      type: String, 
-      require: true, 
-      unique: true },
+    passwordHash: {
+      type: String,
+      require: true,
+      unique: true
+    },
 
-    usertype: {type:String,  enum: ['buddy','inNeed'],},
+    usertype: { type: String, enum: ['buddy', 'inNeed'], },
     birthday: Date,
     city: String,
     choiceOfAction: [String],
-    profileInput: {String}
+    
+    profileInput: {
+      tigerIntro: { type: String, default: "" },
+      helpDef: { type: String, default: "" }
+    }
   },
   {
     timestamps: true

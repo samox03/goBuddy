@@ -71,7 +71,7 @@ router.post("/signup/buddy", (req, res, next) => {
     const hash1 = bcrypt.hashSync(password1, salt);
 
     console.log("creating user ...")
-    User.create({ username: username, email: email, passwordHash: hash1, usertype: "buddy", city: city, bithday: birthday, choiceOfAction: choiceOfAction, profileInput: {} })
+    User.create({ username: username, email: email, passwordHash: hash1, usertype: "buddy", city: city, birthday: birthday, choiceOfAction: choiceOfAction, profileInput: {} })
 
         .then(userFromDB => {
             console.log('A new buddy has joined the pool: ', userFromDB);

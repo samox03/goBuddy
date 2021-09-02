@@ -1,6 +1,6 @@
 <div id="navbarUser">
-    <ul>
-      <div>
+  <ul>
+    <div>
       <li>
         {{#if userInSession}}
           <h2>Welcome {{userInSession.username}}</h2>
@@ -8,43 +8,47 @@
           <p>Still no logged in user, sorry!</p>
         {{/if}}
       </li>
-      </div>
-      <div class="navbarUserWrapper">
-      {{!-- doesnt work like this: --}}
-        <a href="/auth/logout">Logout</a>
-         {{!-- works like this but looks ugly: --}}
-         {{!-- <form id="logout-form" action="/auth/logout" method="POST">
+    </div>
+    <div class="navbarUserWrapper">
+      {{! doesnt work like this: }}
+      <a href="/auth/logout">Logout</a>
+      {{! works like this but looks ugly: }}
+      {{! <form id="logout-form" action="/auth/logout" method="POST">
             <button>Logout</button>
-        </form> --}}
+        </form> }}
       <li>
         <button>
           <a href="/auth/tigerView">TEST: Reload the page</a>
         </button>
       </li>
-      </div>
-    </ul>
+    </div>
+  </ul>
 </div>
-
 
 <div id="tigerViewLogIn-Wrapper">
   <div class="tigerLeft">
     <div>
-      <form class="tigerInputIntroduction">
-        <label for="tigerIntro">Write a few sentence about yourself:</label><br
-        />
-        {{!-- <input type="text" id="tigerIntro" name="tigerIntro" /> --}}
-          <textarea type="text" id="tigerIntro" name="tigerIntro">
-          </textarea>
+      <form
+        class="tigerInputIntroduction"
+        method="POST"
+        action="/auth/tigerView"
+      >
+        <p>
+          <label for="tigerIntro">Write a few sentence about yourself:</label><br
+          />
+          {{! <input type="text" id="tigerIntro" name="tigerIntro" /> }}
+          <textarea type="text" id="tigerIntro" name="tigerIntro">{{userInSession.profileInput.tigerIntro}}</textarea>
+          {{! <INPUT type="submit" value="Send"><INPUT type="reset"> }}
+          <label for="helpDef">Write a few sentence about the help you need:</label><br/>
+          <textarea type="text" id="helpDef" name="helpDef">{{userInSession.profileInput.helpDef}}</textarea>
+        </p>
+        <div>
+          <button class="update-Btn" type="submit">Update your profile</button>
+        </div>
+
       </form>
     </div>
-    <div>
-      <form class="tigerInputHelpDefinition">
-        <label for="helpDef">Write a few sentence about the help you need:</label><br
-        />
-        <textarea type="text" id="helpDef" name="helpDef">
-          </textarea>
-      </form>
-    </div>
+
   </div>
 
   <div class="tigerRight">
@@ -54,7 +58,3 @@
     </div>
   </div>
 </div>
-
-  <div>
-    <button class="update-Btn" type="submit">Update your profile</button>
-  </div>

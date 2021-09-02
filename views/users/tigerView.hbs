@@ -1,6 +1,6 @@
-<div id="navbar">
-  <navbar>
+<div id="navbarUser">
     <ul>
+      <div>
       <li>
         {{#if userInSession}}
           <h2>Welcome {{userInSession.username}}</h2>
@@ -8,15 +8,23 @@
           <p>Still no logged in user, sorry!</p>
         {{/if}}
       </li>
-      <li><a href="/auth/logout">Logout</a></li>
+      </div>
+      <div class="navbarUserWrapper">
+      {{!-- doesnt work like this: --}}
+        <a href="/auth/logout">Logout</a>
+         {{!-- works like this but looks ugly: --}}
+         {{!-- <form id="logout-form" action="/auth/logout" method="POST">
+            <button>Logout</button>
+        </form> --}}
       <li>
         <button>
-          <a href="/tigerView">TEST: Reload the page</a>
+          <a href="/auth/tigerView">TEST: Reload the page</a>
         </button>
       </li>
+      </div>
     </ul>
-  </navbar>
 </div>
+
 
 <div id="tigerViewLogIn-Wrapper">
   <div class="tigerLeft">
@@ -24,24 +32,29 @@
       <form class="tigerInputIntroduction">
         <label for="tigerIntro">Write a few sentence about yourself:</label><br
         />
-        <input type="text" id="tigerIntro" name="tigerIntro" />
+        {{!-- <input type="text" id="tigerIntro" name="tigerIntro" /> --}}
+          <textarea type="text" id="tigerIntro" name="tigerIntro">
+          </textarea>
       </form>
     </div>
     <div>
       <form class="tigerInputHelpDefinition">
         <label for="helpDef">Write a few sentence about the help you need:</label><br
         />
-        <input type="text" id="helpDef" name="helpDef" />
+        <textarea type="text" id="helpDef" name="helpDef">
+          </textarea>
       </form>
-    </div>
-    <div>
-      <button type="submit">Update your profile</button>
     </div>
   </div>
 
-  <div>
-    <div class="tigerMailbox tigerRight">
-      TODO: Insert/display message inbox
+  <div class="tigerRight">
+    <div class="tigerMailbox">
+      <h3>Your Mailbox: You got XY messages</h3>
+      {{! TODO: Insert/display message inbox }}
     </div>
   </div>
 </div>
+
+  <div>
+    <button class="update-Btn" type="submit">Update your profile</button>
+  </div>

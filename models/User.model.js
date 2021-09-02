@@ -26,7 +26,9 @@ const userSchema = new Schema(
 
     usertype: {type:String,  enum: ['buddy','inNeed'],},
     birthday: Date,
-    choiceOfAction: [String]
+    city: String,
+    choiceOfAction: [String],
+    profileInput: {String}
   },
   {
     timestamps: true

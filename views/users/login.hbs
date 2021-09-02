@@ -1,9 +1,11 @@
-<div class="header">
-  <h2>Build new bridges! </h2>
+<div class="login-wrapper">
+
+  <div class="login-header">
+    <h2>Build new bridges! </h2>
   </div>
+
   <div id="form"></div>
-   <h3>Log into your account: </h3>
-  {{! be carefull! Here the auth/ -route is set!! maybe this has to be changed later on.. }}
+  <h3>Log into your account: </h3>
   <form action="/auth/login" method="POST">
     <label for="input-email">Email</label>
     <input
@@ -21,7 +23,9 @@
       placeholder="*********"
     />
 
-    <button type="submit">Login</button>
+    <div class="login-btn">
+      <button type="submit">Login</button>
+    </div>
 
     {{#if errorMessage}}
       <p class="error">{{errorMessage}}</p>

@@ -1,3 +1,11 @@
+const router = require("express").Router();
+const mongoose = require('mongoose');
+
+const User = require("../models/User.model");
+const Message = require("../models/Message.model");
+
+
+
 //GET /tiger details
 //if buddy clicks on tiger preview (in auth/buddyView)  he gets redirected here to show the whole selfdescription of the tiger.
 //here he can click on a button to message this tiger or go back to collection.
@@ -28,3 +36,6 @@ router.get('/tigerslist/:id/message', (req, res, next) => {
 
 //message to buddy
 //TODO:setting up setting tiger inbox and tiger replying to buddy.
+
+
+module.exports = router;

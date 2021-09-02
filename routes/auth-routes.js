@@ -22,7 +22,7 @@ router.post("/signup/buddy", (req, res, next) => {
 
     //storing the userinput 
     //usertype still undefined and needs to be preset for this formvalidation 
-    const { username, email, password, birthday, hangingOut, dailyTasks, teaching } = req.body;
+    const { username, email, password, birthday, city, hangingOut, dailyTasks, teaching } = req.body;
 
     //reducing the passwords to one
     //still open: check if both inputs are the same
@@ -71,10 +71,7 @@ router.post("/signup/buddy", (req, res, next) => {
     const hash1 = bcrypt.hashSync(password1, salt);
 
     console.log("creating user ...")
-    User.create({ username: username, email: email, passwordHash: hash1, usertype: "buddy", bithday: birthday, choiceOfAction: choiceOfAction })
-        // .then(() => {
-        //     res.send("user created")
-        // })
+    User.create({ username: username, email: email, passwordHash: hash1, usertype: "buddy", city: city, bithday: birthday, choiceOfAction: choiceOfAction, profileInput: {} })
 
         .then(userFromDB => {
             console.log('A new buddy has joined the pool: ', userFromDB);
@@ -106,9 +103,17 @@ router.get('/buddyView', (req, res) => {
         res.redirect('/');
     }
     else {
-        res.render('users/buddyView', {
-            userInSession: req.session.currentUser
-        });
+        User.find({ city: req.session.currentUser.city, usertype: 'inNeed' }).then(users => {
+            let allUsersExceptMe = users.filter(e => {
+                return e.email !== req.session.currentUser.email
+            })
+            console.log("users", users)
+            res.render('users/buddyView', {
+                userInSession: req.session.currentUser,
+                users: allUsersExceptMe
+            });
+        })
+
     }
 });
 
@@ -131,7 +136,7 @@ router.post("/signup/tiger", (req, res, next) => {
 
     //storing the userinput 
     //usertype still undefined and needs to be preset for this formvalidation 
-    const { username, email, password, birthday, hangingOut, dailyTasks, teaching } = req.body;
+    const { username, email, password, birthday, city, hangingOut, dailyTasks, teaching } = req.body;
 
     //reducing the passwords to one
     //still open: check if both inputs are the same
@@ -176,13 +181,11 @@ router.post("/signup/tiger", (req, res, next) => {
     //create a hashed version of the password:
     const hash1 = bcrypt.hashSync(password1, salt);
 
-    User.create({ username: username, email: email, passwordHash: hash1, usertype: "inNeed", bithday: birthday, choiceOfAction: choiceOfAction })
-        // .then(() => {
-        //     res.send("user created")
-        // })
+    User.create({ username: username, email: email, passwordHash: hash1, usertype: "inNeed", city: city, bithday: birthday, choiceOfAction: choiceOfAction, profileInput: {} })
 
         .then(userFromDB => {
             console.log('A new buddy has joined the pool: ', userFromDB);
+
             res.redirect('/auth/tigerView');
         })
         .catch(error => {
@@ -270,12 +273,13 @@ router.post('/login', (req, res, next) => {
 });
 
 
-
 //////////// L O G O U T ///////////
 router.post('/logout', (req, res) => {
     req.session.destroy();
-    // res.redirect('/');
-});
+    // req.session.destroy(req.sessionID);
+    res.redirect('/');
+  });
+  
 
 
 

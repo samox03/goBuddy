@@ -11,14 +11,18 @@
       </li>
       </div>
       <div class="navbarUserWrapper">
+  
       <li>
-        {{!-- search for username mit usertype tiger --}}
-        <input type="search" id="searchfield" name="searchfield" placeholder="Search for tigers"/>
-      </li>
+         <button>
+          <a href="/interact/inbox">Mailbox</a>
+        </button>
+        </li>
       <li>
         <button>
           <a href="/auth/buddyView">TEST: Reload the page</a>
         </button>
+        <form id="logout-form" action="/auth/logout" method="POST">
+            <button>Logout</button>
       </li>
       <li>
         {{! button to refresh page and see if there are new messages }}
@@ -44,11 +48,9 @@
       <br>
       City: {{this.city}}
       <br>
-      {{!-- Profileinfo:
-      {{}} --}}
+      Looking for: {{this.choiceOfAction}}
       <br>
       <button><a href="/interact/tigerslist/{{id}}">See Details</a></button>
-      <button><a href="/interact/tigerslist/{{id}}/message">Get In Touch</a></button>
     {{/each}}
   </div>
 </div>

@@ -4,7 +4,7 @@
       <div>
       <li>
         {{#if userInSession}}
-          <h2>Welcome {{userInSession.username}} !</h2>
+          <a href="/auth/buddyView" class="homeLink"><h2>Welcome {{userInSession.username}} !</h2></a>
         {{else}}
           <p>Still no logged in user, sorry!</p>
         {{/if}}
@@ -32,16 +32,16 @@
 
 
 
-<div class="inboxBuddy">
+<div class="inbox">
   <h3>Inbox</h3>
   {{#each msgs}}
   {{this.sender.username}} wrote: {{this.content}}
   {{/each}}
 
   <div class="messenger-Box">
-    <h4>Write your answer here</h4>
+    <h4>Write your answer here:</h4>
     <!-- Input form and submission -->
-    <form class="message-form" method="POST" action="/interact/tigerslist/{{userInSession._id}}/message">
+    <form class="message-form" method="POST" action="/interact/{{userInSession._id}}/message">
       <input
         name="typedMessage"
         type="text"

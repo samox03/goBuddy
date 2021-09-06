@@ -11,11 +11,6 @@ body {
   padding: 40px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background-color: rgb(243, 234, 253);
-  padding-bottom: 60px; /* Height of the footer */
-}
-
-#body{
-  padding-bottom: 60px; /* Height of the footer */
 }
 
 /* adjusting that content wraps if screensize lower than 960px width */
@@ -40,23 +35,44 @@ a {
   text-align: flex-end;
 }
 
-#navbarUser ul {
-  list-style: none;
-  text-decoration: none;
+#navbarUser {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
 }
 
-.navbarUserWrapper{
+.navbarUserWrapper {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
   align-items: center;
 }
 
-.navbarUserWrapper li {
-  justify-content: flex-end;
+.nav-wrapper-right ul {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.navBtn {
+  background-color: rgb(243, 234, 253);
+  border: none;
+  text-transform: lowercase;
+}
+
+.nav-wrapper-right button a {
+  text-decoration: none;
+  color: rgba(94, 38, 247, 0.938);
+  font-weight: bold;
+}
+
+.logoHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
 }
 
 h1 {
@@ -112,7 +128,8 @@ h3 {
 .joinOption-Wrapper {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 12px;
+  align-items: baseline;
+  margin: 16px auto;
 }
 
 .login-wrapper {
@@ -144,15 +161,17 @@ h3 {
   text-transform: uppercase;
   transition: 0.3s ease background;
   border: none;
+  border-radius: 15px;
 }
 
-.login-btn{
+.login-btn {
   display: flex;
   justify-content: center;
-  margin-top: 20px 
+  margin-top: 20px;
 }
 
-.login-wrapper form button:hover {
+.login-wrapper form button:hover,
+.btn:hover {
   background: rgba(94, 38, 247, 0.938);
   color: #e6c843;
   transition: 0.3s ease background;
@@ -227,10 +246,9 @@ input[type="checkbox"] {
 }
 
 .signUpBtn {
-  margin-top: 8px;
-  background: #fff;
-  color: #e6c843;
-  padding: 4px 20px;
+  background: rgb(255, 174, 160);
+  color: black;
+  padding: 5px 20px;
   text-align: center;
   cursor: pointer;
   display: inline-block;
@@ -238,6 +256,9 @@ input[type="checkbox"] {
   text-decoration: none;
   text-transform: uppercase;
   transition: 0.3s ease background;
+  border-radius: 15px;
+  width: 190px;
+  border: none;
 }
 
 .signUpBtn:hover {
@@ -246,24 +267,77 @@ input[type="checkbox"] {
   transition: 0.3s ease background;
 }
 
-#tigerIntro{
+#signup-Page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.userSpecification {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+#redirectLogin {
+  margin-top: 12px;
+}
+
+.grid {
+  border: solid rgba(94, 38, 247, 0.938);
+  border-radius: 8px;
+  padding: 8 10;
+  width: fit-content;
+  background-color: #e6c843;
+}
+
+.g-col-6 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.grid button {
+  background-color: rgba(94, 38, 247, 0.938);
+  padding: 3px;
+}
+
+.grid button a {
+  text-decoration: none;
+  color: white;
+  text-transform: uppercase;
+}
+
+.btn:hover a {
+  background: rgba(94, 38, 247, 0.938);
+  color: black;
+  transition: 0.3s ease background;
+}
+
+#tigerIntro {
   height: 25%;
   width: 100%;
   text-align: start;
 }
 
-#helpDef{
-    height: 25%;
-    width: 100%
+#helpDef {
+  height: 25%;
+  width: 100%;
 }
 
-#tigerViewLogIn-Wrapper{
+#tigerViewLogIn-Wrapper {
   display: flex;
   justify-content: space-around;
 }
 
-.update-Btn{
-  margin: 50px;
+.tigerRight {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.update-Btn {
+  margin: 15px;
   background: #e6c843;
   color: #fff;
   padding: 4px 20px;
@@ -275,17 +349,33 @@ input[type="checkbox"] {
   text-transform: uppercase;
   transition: 0.3s ease background;
   border: none;
+  border-radius: 15px;
 }
 
-.update-Btn a{
+.update-Btn a {
   text-decoration: none;
   color: #fff;
 }
 
-.update-Btn:hover{
-  background-color: #e6c843;
-  color: #fff;
+.update-Btn:hover {
+  background: rgba(94, 38, 247, 0.938);
   transition: 0.3s ease background;
+}
+
+.homeLink{
+  text-decoration: none;
+  color: black;
+}
+
+.homeLink:hover{
+  color: black;
+}
+
+.message-wrapper{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  
 }
 
 #footer {

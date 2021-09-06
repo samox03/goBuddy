@@ -1,45 +1,52 @@
+
 <div id="navbarUser">
+
+  <div class="logoHeader">
+    <img src="../../public/images/logo2Gobuddy.jpg" />
+    {{#if userInSession}}
+     <a href="/auth/buddyView" class="homeLink"><h2>Welcome {{userInSession.username}} !</h2></a>
+    {{else}}
+      <p>Still no logged in user, sorry!</p>
+    {{/if}}
+  </div>
+
+  {{! doesnt work like this: }}
+  {{! <a href="/auth/logout">Logout</a> }}
+  {{! works like this but looks ugly: }}
+  <div class='nav-wrapper-right'>
     <ul>
-      <div>
-      <li>
-        {{#if userInSession}}
-          <h2>Welcome {{userInSession.username}} !</h2>
-        {{else}}
-          <p>Still no logged in user, sorry!</p>
-        {{/if}}
-      </li>
-      </div>
-      <div class="navbarUserWrapper">
-      <li>
-        <button>
+        <li>
+         <button class="navBtn">
           <a href="/auth/buddyView">Go back to overview</a>
         </button>
-      </li>
-      <li>
-        <form id="logout-form" action="/auth/logout" method="POST">
-          <button>Logout</button>
-        </form>
-      </li>
-      </div>
+        </li>
+        <li>
+          <form id="logout-form" action="/auth/logout" method="POST">
+            <button class="navBtn">Logout</button>
+          </form>
+        </li>
     </ul>
+  </div>
 </div>
 
 
+
+
 <dev>
-  <h2>Profile of {{this.username}}</h2>
-  <h3>Looking for: {{this.choiceOfAction}}</h3>
+  <h2>Profile of {{tigerDetails.username}}</h2>
+  <h3>Topic: {{tigerDetails.choiceOfAction}}</h3>
   <dev class="tigerDetails-wrapper">
     <dev>
       Short Infos:
-      <p>{{this.profileInput.tigerIntro}}</p>
+      <p>{{tigerDetails.profileInput.tigerIntro}}</p>
       {{! show input of tiger id="tigerIntro" }}
     </dev>
     <dev>
       Needs some support for:
-      {{this.profileInput.helpDef}}
+      {{tigerDetails.profileInput.helpDef}}
       {{! show input of tiger id="helpDef"}}
       <br>
     </dev>
   </dev>
-  <button><a href="/interact/tigerslist/{{id}}/message">Message</a></button>
+  <button class="update-Btn"><a href="/interact/{{tigerDetails._id}}/message">Contact</a></button>
 </dev>

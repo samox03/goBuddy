@@ -1,56 +1,48 @@
+
 <div id="navbarUser">
 
+  <div class="logoHeader">
+    <img src="../../public/images/logo2Gobuddy.jpg" />
+    {{#if userInSession}}
+      <h2>Welcome {{userInSession.username}} !</h2>
+    {{else}}
+      <p>Still no logged in user, sorry!</p>
+    {{/if}}
+  </div>
+
+  {{! doesnt work like this: }}
+  {{! <a href="/auth/logout">Logout</a> }}
+  {{! works like this but looks ugly: }}
+  <div class='nav-wrapper-right'>
     <ul>
-      <div>
-      <li>
-        {{#if userInSession}}
-          <h2>Welcome {{userInSession.username}} !</h2>
-        {{else}}
-          <p>Still no logged in user, sorry!</p>
-        {{/if}}
-      </li>
-      </div>
-      <div class="navbarUserWrapper">
-  
-      <li>
-         <button>
-          <a href="/interact/inbox">Mailbox</a>
-        </button>
+        <li>
+          <button class="navBtn">
+            <a href="/interact/inbox">Mailbox</a>
+          </button>
         </li>
-      <li>
-        <button>
-          <a href="/auth/buddyView">TEST: Reload the page</a>
-        </button>
-        <form id="logout-form" action="/auth/logout" method="POST">
-            <button>Logout</button>
-      </li>
-      <li>
-        {{! button to refresh page and see if there are new messages }}
-        {{!-- <a href="">Mailbox</a> --}}
-      </li>
-      <li>
-        {{!-- doesnt work like this: --}}
-        <a href="/auth/logout">Logout</a>
-         {{!-- works like this but looks ugly: --}}
-         {{!-- <form id="logout-form" action="/auth/logout" method="POST">
-            <button>Logout</button>
-        </form> --}}
-      </li>
-      </div>
+        <li>
+          <form id="logout-form" action="/auth/logout" method="POST">
+            <button class="navBtn">Logout</button>
+          </form>
+        </li>
     </ul>
+  </div>
 </div>
+
 
 <div>
   <h3>People around you in need:</h3>
-  <div id="mailboxBuddyWrapper">
+
+  <div class="grid">
     {{#each users}}
-      Name: {{this.username}}
-      <br>
-      City: {{this.city}}
-      <br>
-      Looking for: {{this.choiceOfAction}}
-      <br>
-      <button><a href="/interact/tigerslist/{{id}}">See Details</a></button>
+     <div class="g-col-6">
+       <h5>{{this.username}}</h5>
+       <div>
+      <h6>City: {{this.city}} <br>
+      Looking for: {{this.choiceOfAction}}</h6>
+      </div>   
+      <button class="btn"><a href="/interact/{{id}}">See Details</a></button>
+      </div>
     {{/each}}
   </div>
-</div>
+

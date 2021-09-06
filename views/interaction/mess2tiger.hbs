@@ -1,53 +1,60 @@
 <div id="navbarUser">
+
+  <div class="logoHeader">
+    <img src="../../public/images/logo2Gobuddy.jpg" />
+    {{#if userInSession}}
+      <a href="/auth/buddyView" class="homeLink"><h2>Welcome {{userInSession.username}} !</h2></a>
+    {{else}}
+      <p>Still no logged in user, sorry!</p>
+    {{/if}}
+  </div>
+
+  {{! doesnt work like this: }}
+  {{! <a href="/auth/logout">Logout</a> }}
+  {{! works like this but looks ugly: }}
+  <div class="nav-wrapper-right">
     <ul>
-      <div>
       <li>
-        {{#if userInSession}}
-          <h2>Welcome {{userInSession.username}} !</h2>
-        {{else}}
-          <p>Still no logged in user, sorry!</p>
-        {{/if}}
-      </li>
-      </div>
-      <div class="navbarUserWrapper">
-      <li>
-        <button>
+        <button class="navBtn">
           <a href="/auth/buddyView">Go back to overview</a>
         </button>
       </li>
-         <li>
-        <button>
+      <li>
+        <button class="navBtn">
           <a href="/interact/inbox">Mailbox</a>
         </button>
       </li>
       <li>
         <form id="logout-form" action="/auth/logout" method="POST">
-          <button>Logout</button>
+          <button class="navBtn">Logout</button>
         </form>
       </li>
-      </div>
     </ul>
+  </div>
 </div>
 
-
-<div>
+<div class="message-wrapper">
   <div class="inboxBuddy">
-    <h4>Your Conversation with XY</h4>
-
-
+    <h4>Your Conversation with {{tigerContact.username}}</h4>
   </div>
 
   <div class="writeMessage">
-    <h4>Write your answer here</h4>
+    <h4>Write your answer here:</h4>
     <!-- Input form and submission -->
-    <form class="message-form" method="POST" action="/interact/tigerslist/{{_id}}/message">
+    <form
+      class="message-form"
+      method="POST"
+      action="/interact/{{tigerContact._id}}/message"
+    >
+    <div>
       <input
         name="typedMessage"
         type="text"
         class="typedMessage"
         placeholder="Type Your Message..."
       />
-      <button class="submit">Send Reply</button>
+      </div>
+      <button class="submit update-Btn">Send Reply</button>
     </form>
 
   </div>

@@ -1,3 +1,5 @@
+<section id="signup-Page">
+<div>
 <section class="welcomeText">
   <h2>Register to find a buddy near you</h2>
   <h3>First of all, congratulations that you decided to ask for help. We know
@@ -28,6 +30,7 @@
   </div>
 
     <div class="userSpecification">
+      <div>
       <h3> Where do you wish some support? Multiple choice possible.</h3>
       <ul class="multipleChoice">
         <li>
@@ -48,6 +51,7 @@
           </label>
         </li>
       </ul>
+      </div>
 
       <div class="password-wrapper">
         <div>
@@ -69,9 +73,17 @@
     </div>
   </form>
 </section>
+</div>
 
        <div class="errorMessage">
         {{#if errorMessage}}
           <p class="error">{{errorMessage}}</p>
         {{/if}}
       </div>
+
+<section id="redirectLogin">
+  <p>Already have an account? <a href="/auth/login">Login</a> here.</p>
+</section>
+
+
+</section>

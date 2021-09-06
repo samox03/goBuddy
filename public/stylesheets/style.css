@@ -48,11 +48,15 @@ a {
   justify-content: space-between;
 }
 
-.navbarUserWrapper {
+.navbarUserWrapper{
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: flex-end;
   align-items: center;
+}
+
+.navbarUserWrapper li {
+  justify-content: flex-end;
 }
 
 h1 {
@@ -271,6 +275,11 @@ input[type="checkbox"] {
   text-transform: uppercase;
   transition: 0.3s ease background;
   border: none;
+}
+
+.update-Btn a{
+  text-decoration: none;
+  color: #fff;
 }
 
 .update-Btn:hover{

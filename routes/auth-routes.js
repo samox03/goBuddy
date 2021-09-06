@@ -75,7 +75,7 @@ router.post("/signup/buddy", (req, res, next) => {
 
         .then(userFromDB => {
             console.log('A new buddy has joined the pool: ', userFromDB);
-            res.redirect('/auth/buddyView');
+            res.redirect('/auth/login');
         })
         .catch(error => {
             if (error instanceof mongoose.Error.ValidationError) {
@@ -181,12 +181,12 @@ router.post("/signup/tiger", (req, res, next) => {
     //create a hashed version of the password:
     const hash1 = bcrypt.hashSync(password1, salt);
 
-    User.create({ username: username, email: email, passwordHash: hash1, usertype: "inNeed", city: city, bithday: birthday, choiceOfAction: choiceOfAction })
+    User.create({ username: username, email: email, passwordHash: hash1, usertype: "inNeed", city: city, birthday: birthday, choiceOfAction: choiceOfAction })
 
         .then(userFromDB => {
             console.log('A new buddy has joined the pool: ', userFromDB);
 
-            res.redirect('/auth/tigerView');
+            res.redirect('/auth/login');
         })
         .catch(error => {
             if (error instanceof mongoose.Error.ValidationError) {

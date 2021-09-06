@@ -1,3 +1,4 @@
+
 <div id="navbarUser">
     <ul>
       <div>
@@ -17,7 +18,7 @@
       </li>
          <li>
         <button>
-          <a href="/interact/inbox">Mailbox</a>
+          <a href="/interact/inboxBuddy">Refresh Page</a>
         </button>
       </li>
       <li>
@@ -30,17 +31,17 @@
 </div>
 
 
-<div>
-  <div class="inboxBuddy">
-    <h4>Your Conversation with XY</h4>
 
+<div class="inboxBuddy">
+  <h3>Inbox</h3>
+  {{#each msgs}}
+  {{this.sender.username}} wrote: {{this.content}}
+  {{/each}}
 
-  </div>
-
-  <div class="writeMessage">
+  <div class="messenger-Box">
     <h4>Write your answer here</h4>
     <!-- Input form and submission -->
-    <form class="message-form" method="POST" action="/interact/tigerslist/{{_id}}/message">
+    <form class="message-form" method="POST" action="/interact/tigerslist/{{userInSession._id}}/message">
       <input
         name="typedMessage"
         type="text"
@@ -51,4 +52,5 @@
     </form>
 
   </div>
+{{!-- display all messages from userInSession --}}
 </div>

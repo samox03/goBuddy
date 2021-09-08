@@ -1,21 +1,31 @@
 <div id="navbarUser">
 
   <div class="logoHeader">
+    <div>
     <img src="../../images/logo2Gobuddy.png" class="logo-small"/>
+    </div>
+    <div>
     {{#if userInSession}}
-      <h2>Welcome {{userInSession.username}} !</h2>
+     <a href="/auth/tigerView" class="homeLink"><h2>Welcome {{userInSession.username}} !</h2></a>
     {{else}}
       <p>Still no logged in user, sorry!</p>
     {{/if}}
+    </div>
   </div>
-
-  {{! doesnt work like this: }}
-  {{! <a href="/auth/logout">Logout</a> }}
-  {{! works like this but looks ugly: }}
+  
   <div class='nav-wrapper-right'>
-      <form id="logout-form" action="/auth/logout" method="POST">
-        <button>Logout</button>
-      </form>
+    <ul>
+        <li>
+          <button class="navBtn">
+            <a href="/interact/inbox">Mailbox</a>
+          </button>
+        </li>
+        <li>
+          <form id="logout-form" action="/auth/logout" method="POST">
+            <button class="navBtn" type="submit">Logout</button>
+          </form>
+        </li>
+    </ul>
   </div>
 </div>
 
@@ -48,8 +58,8 @@
         {{! <div>
           <button class="update-Btn" type="submit">Update your profile</button>
         </div> }}
-        <button class="update-Btn">
-          <a href="/auth/tigerView">Update your profile</a>
+        <button class="update-Btn" type="submit">
+          Update your profile
         </button>
       </form>
     </div>

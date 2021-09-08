@@ -54,7 +54,7 @@ const users = [
     // Password: Giovanni123
     usertype: 'buddy',
     birthday: 3003-03-03,
-    city: 'Kiel',
+    city: 'Berlin',
     choiceOfAction: ['dailyTasks'],
     profileInput: { tigerIntro: '', helpDef: '' }
   },
@@ -66,7 +66,7 @@ const users = [
     // Password: Meike123
     usertype: 'inNeed',
     birthday: 3003-03-30,
-    city: 'Kiel',
+    city: 'Berlin',
     choiceOfAction: ['dailyTasks', 'hangingOut', 'teaching'],
     profileInput: { tigerIntro: '', helpDef: '' }
   },
@@ -78,10 +78,23 @@ const users = [
     // Password: Gisela123
     usertype: 'inNeed',
     birthday: 2002-03-20,
-    city: 'Kiel',
+    city: 'Berlin',
     choiceOfAction: ['dailyTasks'],
-    profileInput: { tigerIntro: '', helpDef: '' }
+    profileInput: { tigerIntro: 'Hi ich bin Gisela, ich habe einen Garten.', helpDef: 'Ich brauche Hilfe fuer den Garten.' }
   },
+
+  {
+    username: "Said",
+    email: "said@hello.de",
+    passwordHash: "$2a$10$292V6pd/ReDoWIi8.U56guLZgoVJzUNoKRFafNSMhY2trSas1nYj6",
+    // Password: Said123
+    usertype: 'inNeed',
+    birthday: 6006-08-09,
+    city: 'Berlin',
+    choiceOfAction: ['dailyTasks', 'hangingOut'],
+    profileInput: { tigerIntro: 'Hi I am Said, I like Sport.', helpDef: 'I m looking for sb to play basketball with...' }
+  },
+
 
 ]
 

@@ -1,52 +1,64 @@
-
 <div id="navbarUser">
 
   <div class="logoHeader">
-    <img src="../../images/logo2Gobuddy.png" class="logo-small" />
-    {{#if userInSession}}
-     <a href="/auth/buddyView" class="homeLink"><h2>Welcome {{userInSession.username}} !</h2></a>
-    {{else}}
-      <p>Still no logged in user, sorry!</p>
-    {{/if}}
+    <div>
+      <img src="../../images/logo2Gobuddy.png" class="logo-small" />
+    </div>
+    <div>
+      {{#if userInSession}}
+        <a href="/auth/buddyView" class="homeLink"><h2>Welcome
+            {{userInSession.username}}
+            !</h2></a>
+      {{else}}
+        <p>Still no logged in user, sorry!</p>
+      {{/if}}
+    </div>
   </div>
 
-  {{! doesnt work like this: }}
-  {{! <a href="/auth/logout">Logout</a> }}
-  {{! works like this but looks ugly: }}
-  <div class='nav-wrapper-right'>
+  <div class="nav-wrapper-right">
     <ul>
-        <li>
-         <button class="navBtn">
-          <a href="/auth/buddyView">Go back to overview</a>
+      <li>
+        <button class="navBtn">
+          <a href="/auth/buddyView">Overview</a>
         </button>
-        </li>
-        <li>
-          <form id="logout-form" action="/auth/logout" method="POST">
-            <button class="navBtn">Logout</button>
-          </form>
-        </li>
+      </li>
+      <li>
+        <button class="navBtn">
+          <a href="/interact/inbox">Mailbox</a>
+        </button>
+      </li>
+      <li>
+        <form id="logout-form" action="/auth/logout" method="POST">
+          <button class="navBtn" type="submit">Logout</button>
+        </form>
+      </li>
     </ul>
   </div>
 </div>
 
-
-
-
-<dev>
-  <h2>Profile of {{tigerDetails.username}}</h2>
-  <h3>Topic: {{tigerDetails.choiceOfAction}}</h3>
-  <dev class="tigerDetails-wrapper">
-    <dev>
-      Short Infos:
-      <p>{{tigerDetails.profileInput.tigerIntro}}</p>
-      {{! show input of tiger id="tigerIntro" }}
-    </dev>
-    <dev>
-      Needs some support for:
-      {{tigerDetails.profileInput.helpDef}}
-      {{! show input of tiger id="helpDef"}}
-      <br>
-    </dev>
-  </dev>
-  <button class="update-Btn"><a href="/interact/{{tigerDetails._id}}/message">Contact</a></button>
-</dev>
+<div class="main-content-box">
+  <div class="grid">
+    <div class="g-col-6">
+      <div class="box-wrapper">
+      <h3>Profile of {{tigerDetails.username}}</h3>
+      <h4><strong>Topic:</strong> {{tigerDetails.choiceOfAction}}</h4>
+      <div class="tigerDetails-wrapper">
+        <div>
+          <strong>Short Infos:</strong>
+          <p>{{tigerDetails.profileInput.tigerIntro}}</p>
+          {{! show input of tiger id="tigerIntro" }}
+        </div>
+        <div>
+          <strong>Looking for:</strong>
+          {{tigerDetails.profileInput.helpDef}}
+          {{! show input of tiger id="helpDef"}}
+          <br />
+        </div>
+      </div>
+      <button class="update-Btn"><a
+          href="/interact/{{tigerDetails._id}}/message"
+        >Contact</a></button>
+        </div>
+    </div>
+  </div>
+</div>

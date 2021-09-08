@@ -1,56 +1,43 @@
-
 <div id="navbarUser">
+
+  <div class="logoHeader">
+    <div>
+      <img src="../../images/logo2Gobuddy.png" class="logo-small" />
+    </div>
+    <div>
+      {{#if userInSession}}
+        <a href="/auth/buddyView" class="homeLink"><h2>Welcome
+            {{userInSession.username}}
+            !</h2></a>
+      {{else}}
+        <p>Still no logged in user, sorry!</p>
+      {{/if}}
+    </div>
+  </div>
+  <div class="nav-wrapper-right">
     <ul>
-      <div>
       <li>
-        {{#if userInSession}}
-          <a href="/auth/buddyView" class="homeLink"><h2>Welcome {{userInSession.username}} !</h2></a>
-        {{else}}
-          <p>Still no logged in user, sorry!</p>
-        {{/if}}
-      </li>
-      </div>
-      <div class="navbarUserWrapper">
-      <li>
-        <button>
-          <a href="/auth/buddyView">Go back to overview</a>
-        </button>
-      </li>
-         <li>
-        <button>
-          <a href="/interact/inboxBuddy">Refresh Page</a>
+        <button class="navBtn">
+          <a href="/interact/inbox">Mailbox</a>
         </button>
       </li>
       <li>
         <form id="logout-form" action="/auth/logout" method="POST">
-          <button>Logout</button>
+          <button class="navBtn" type="submit">Logout</button>
         </form>
       </li>
-      </div>
     </ul>
+  </div>
 </div>
 
-
-
-<div class="inbox">
-  <h3>Inbox</h3>
-  {{#each msgs}}
-  {{this.sender.username}} wrote: {{this.content}}
+<div class="message-wrapper">
+  <div class="inbox">
+    <h3>Inbox</h3>
+    {{#each msgs}}
+      {{this.sender.username}}
+      <br />
+<a href="{{sender._id}}/message" class="update-Btn">See Conversation</a>   
   {{/each}}
-
-  <div class="messenger-Box">
-    <h4>Write your answer here:</h4>
-    <!-- Input form and submission -->
-    <form class="message-form" method="POST" action="/interact/{{userInSession._id}}/message">
-      <input
-        name="typedMessage"
-        type="text"
-        class="typedMessage"
-        placeholder="Type Your Message..."
-      />
-      <button class="submit">Send Reply</button>
-    </form>
-
   </div>
-{{!-- display all messages from userInSession --}}
+
 </div>

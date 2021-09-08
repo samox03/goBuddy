@@ -232,9 +232,7 @@ router.post('/tigerView', (req, res) => {
         }
     })
         .then(() => {
-            res.render('users/tigerView', {
-                userInSession: req.session.currentUser
-            });
+            res.redirect("/auth/tigerView")
         });
 });
 

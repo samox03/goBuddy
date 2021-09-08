@@ -1,12 +1,16 @@
 <div id="navbarUser">
 
   <div class="logoHeader">
+    <div>
     <img src="../../images/logo2Gobuddy.png" class="logo-small"/>
+    </div>
+    <div>
     {{#if userInSession}}
       <a href="/auth/buddyView" class="homeLink"><h2>Welcome {{userInSession.username}} !</h2></a>
     {{else}}
       <p>Still no logged in user, sorry!</p>
     {{/if}}
+    </div>
   </div>
 
   {{! doesnt work like this: }}
@@ -16,7 +20,7 @@
     <ul>
       <li>
         <button class="navBtn">
-          <a href="/auth/buddyView">Go back to overview</a>
+          <a href="/auth/buddyView">Overview</a>
         </button>
       </li>
       <li>
@@ -26,20 +30,24 @@
       </li>
       <li>
         <form id="logout-form" action="/auth/logout" method="POST">
-          <button class="navBtn">Logout</button>
+          <button class="navBtn" type="submit">Logout</button>
         </form>
       </li>
     </ul>
   </div>
 </div>
 
-<div class="message-wrapper">
+<div class="message-wrapper main-content-box">
   <div class="inboxBuddy">
-    <h4>Your Conversation with {{tigerContact.username}}</h4>
+    <h4><strong>Your Conversation with {{tigerContact.username}}:</strong></h4>
+      {{#each msgs}}
+    {{this.sender.username}} wrote: {{this.content}}
+    <br>
+    {{/each}}
   </div>
 
   <div class="writeMessage">
-    <h4>Write your answer here:</h4>
+    <h4><strong>Write your answer here:</strong></h4>
     <!-- Input form and submission -->
     <form
       class="message-form"
@@ -47,14 +55,14 @@
       action="/interact/{{tigerContact._id}}/message"
     >
     <div>
-      <input
+      <textarea
         name="typedMessage"
         type="text"
         class="typedMessage"
         placeholder="Type Your Message..."
-      />
+      /></textarea>
       </div>
-      <button class="submit update-Btn">Send Reply</button>
+      <button type="submit" class="submit update-Btn">Send</button>
     </form>
 
   </div>

@@ -1,48 +1,58 @@
-
 <div id="navbarUser">
 
   <div class="logoHeader">
-    <img src="../../images/logo2Gobuddy.png" class="logo-small"/>
-    {{#if userInSession}}
-      <h2>Welcome {{userInSession.username}} !</h2>
-    {{else}}
-      <p>Still no logged in user, sorry!</p>
-    {{/if}}
+    <div>
+      <img src="../../images/logo2Gobuddy.png" class="logo-small" />
+    </div>
+    <div>
+      {{#if userInSession}}
+       <a href="/auth/buddyView" class="homeLink">
+        <h2>Welcome {{userInSession.username}} !</h2></a>
+      {{else}}
+        <p>Still no logged in user, sorry!</p>
+      {{/if}}
+    </div>
   </div>
 
   {{! doesnt work like this: }}
   {{! <a href="/auth/logout">Logout</a> }}
   {{! works like this but looks ugly: }}
-  <div class='nav-wrapper-right'>
+  <div class="nav-wrapper-right">
     <ul>
-        <li>
-          <button class="navBtn">
-            <a href="/interact/inbox">Mailbox</a>
-          </button>
-        </li>
-        <li>
-          <form id="logout-form" action="/auth/logout" method="POST">
-            <button class="navBtn">Logout</button>
-          </form>
-        </li>
+      <li>
+        <button class="navBtn">
+          <a href="/interact/inbox">Mailbox</a>
+        </button>
+      </li>
+      <li>
+        <form id="logout-form" action="/auth/logout" method="POST">
+          <button class="navBtn" type="submit">Logout</button>
+        </form>
+      </li>
     </ul>
   </div>
 </div>
 
-
-<div>
+<div class="main-content-box">
   <h3>People around you in need:</h3>
-
+<div class="box-wrapper">
+  {{#each users}}
   <div class="grid">
-    {{#each users}}
-     <div class="g-col-6">
-       <h5>{{this.username}}</h5>
-       <div>
-      <h6>City: {{this.city}} <br>
-      Looking for: {{this.choiceOfAction}}</h6>
-      </div>   
-      <button class="btn"><a href="/interact/{{id}}">See Details</a></button>
+    <div class="g-col-6">
+      <div class="box-wrapper">
+          <h5>{{this.username}}</h5>
+          <div>
+            <h6><strong>City:</strong>
+              {{this.city}}
+              <br />
+              <strong>Looking for: </strong><br />
+              {{this.choiceOfAction}}</h6>
+          </div>
+          <button class="btn"><a href="/interact/{{id}}"><em
+              >Details</em></a></button>
+        </div>
       </div>
-    {{/each}}
-  </div>
-
+    </div>
+  {{/each}}
+</div>
+</div>

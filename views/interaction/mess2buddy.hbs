@@ -1,50 +1,59 @@
+
 <div id="navbarUser">
-  <ul>
+
+  <div class="logoHeader">
     <div>
-      <li>
-        {{#if userInSession}}
-          <h2>Welcome {{userInSession.username}} !</h2>
-        {{else}}
-          <p>Still no logged in user, sorry!</p>
-        {{/if}}
-      </li>
+    <img src="../../images/logo2Gobuddy.png" class="logo-small"/>
     </div>
-    <div class="navbarUserWrapper">
-      <li>
-        <button>
-          <a href="/auth/tigerView">Go back to your inbox</a>
-        </button>
-      </li>
-      {{! doesnt work like this: }}
-      {{! <a href="/auth/logout">Logout</a> }}
-      {{! works like this but looks ugly: }}
-      <li>
-        <form id="logout-form" action="/auth/logout" method="POST">
-          <button>Logout</button>
-        </form>
-      </li>
+    <div>
+    {{#if userInSession}}
+     <a href="/auth/tigerView" class="homeLink"><h2>Welcome {{userInSession.username}} !</h2></a>
+    {{else}}
+      <p>Still no logged in user, sorry!</p>
+    {{/if}}
     </div>
-  </ul>
+  </div>
+  
+  <div class='nav-wrapper-right'>
+    <ul>
+        <li>
+          <button class="navBtn">
+            <a href="/interact/inbox">Mailbox</a>
+          </button>
+        </li>
+        <li>
+          <form id="logout-form" action="/auth/logout" method="POST">
+            <button class="navBtn" type="submit">Logout</button>
+          </form>
+        </li>
+    </ul>
+  </div>
 </div>
 
-<div>
-  <div class="inboxTiger">
-    <h4>Your Conversation with XY</h4>
-    {{! display conversation with user }}
 
-    <button>Dismiss/Next Mail</button>
+
+<div class="main-content-box">
+  <div class="inboxTiger">
+    <h4><strong>Your Conversation with {{tigerContact.username}}</strong></h4>
+    {{! display conversation with user }}
+    {{#each msgs}}
+    {{this.sender.username}} wrote: {{this.content}}
+    <br>
+    {{/each}}
   </div>
 
-  <div class="writeMessage">
-    <h4>Write your answer here</h4>
+  <div class="messenger-Box">
+    <h3>Write your answer here:</h3>
     <!-- Input form and submission -->
-    <form class="message-form">
-      <input
+    <form class="message-form" method="POST" action="/interact/{{tigerContact._id}}/message">
+      <textarea
+        name="typedMessage"
         type="text"
         class="typedMessage"
         placeholder="Type Your Message..."
-      />
-      <button class="submit">Send Reply</button>
+      /></textarea>
+      <br>
+      <button type="submit" class="update-Btn">Send</button>
     </form>
 
   </div>

@@ -66,7 +66,7 @@ router.get('/:id/message', (req, res, next) => {
   //access/safe user in session:
   User.findById(req.session.currentUser._id)
     .then((user) => {
-      Message.find({ receiver: user }).populate('sender')
+      Message.find({$or:[{ receiver: user}, {sender: user}]}).populate('sender')
         .then((myMessages) => {
 
           //safe choosen tiger_id

@@ -26,7 +26,7 @@ module.exports = app => {
      
       //NEW VERSION:
       store: MongoStore.create({
-        mongoUrl: 'mongodb://localhost/visualisesikk',
+        mongoUrl: process.env.MONGODB_URI,
         // ttl => time to live
         
       })

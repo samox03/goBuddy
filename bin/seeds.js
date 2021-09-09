@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const User = require('../models/User.model')
 
 
-mongoose.connect('mongodb://localhost/visualisesikk', {
+mongoose.connect(process.env.MONGODB_URI, {
   useCreateIndex: true,
   useNewUrlParser: true,
   useUnifiedTopology: true

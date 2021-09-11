@@ -42,19 +42,19 @@
       <div class="box-wrapper">
       <h3>Profile of {{tigerDetails.username}}</h3>
       <h4><strong>Topic:</strong> {{tigerDetails.choiceOfAction}}</h4>
-      <div class="tigerDetails-wrapper">
-        <div>
-          <strong>Short Infos:</strong>
-          <p>{{tigerDetails.profileInput.tigerIntro}}</p>
-          {{! show input of tiger id="tigerIntro" }}
+        <div class="tigerDetails-wrapper">
+          <div>
+            <strong>Short Infos:</strong>
+            <p>{{tigerDetails.profileInput.tigerIntro}}</p>
+            {{! show input of tiger id="tigerIntro" }}
+          </div>
+          <div>
+            <strong>Looking for:</strong>
+            {{tigerDetails.profileInput.helpDef}}
+            {{! show input of tiger id="helpDef"}}
+            <br />
+          </div>
         </div>
-        <div>
-          <strong>Looking for:</strong>
-          {{tigerDetails.profileInput.helpDef}}
-          {{! show input of tiger id="helpDef"}}
-          <br />
-        </div>
-      </div>
       <button class="update-Btn"><a
           href="/interact/{{tigerDetails._id}}/message"
         >Contact</a></button>
